@@ -1,0 +1,24 @@
+{
+	"name": "ids_tarka_renewables_target_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "pssynapsews-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "tarka/all_files_csv",
+				"fileSystem": "renewables"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}
