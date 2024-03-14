@@ -1,0 +1,121 @@
+{
+	"name": "Copy To Raw Tumble",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Daily Files To Raw",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Trigger Type",
+						"value": "Tumble"
+					},
+					{
+						"name": "Source",
+						"value": "dailyfiles//@{concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')}"
+					},
+					{
+						"name": "Destination",
+						"value": "renewables/tarka/dailyfiles/@{concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')}"
+					},
+					{
+						"name": "fileCopied",
+						"value": "@concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 2
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ids_tarka_source_15",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_Name": {
+								"value": "@concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ids_tarka_destination_csv",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_Name": {
+								"value": "@concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"file_Name_Suffix": {
+				"type": "string"
+			},
+			"par1": {
+				"type": "string",
+				"defaultValue": "'abc'"
+			},
+			"par2": {
+				"type": "string",
+				"defaultValue": "'123'"
+			}
+		},
+		"variables": {
+			"file_Name_Prefix": {
+				"type": "String",
+				"defaultValue": "ID118892_"
+			}
+		},
+		"folder": {
+			"name": "Production"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-03-04T10:38:17Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

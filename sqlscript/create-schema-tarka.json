@@ -1,0 +1,17 @@
+{
+	"name": "create-schema-tarka",
+	"properties": {
+		"content": {
+			"query": "CREATE SCHEMA tarka",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sav_sqldb_curated",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

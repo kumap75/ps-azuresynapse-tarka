@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "SELECT DISTINCT FORMAT(DateTime,'M-yyyy'), count(1) FROM tarka.all_files_combined group by  FORMAT(DateTime,'M-yyyy') order by 1 asc\nGo\n\n-- drop external table tarka.all_months_combined;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sav_renewables",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"name": "ids_renewables_tarka_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "pssynapsews-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "combined.parquet",
+				"folderPath": "tarka/all_files_parquet",
+				"fileSystem": "renewables"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

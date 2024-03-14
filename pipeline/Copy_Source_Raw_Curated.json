@@ -1,0 +1,321 @@
+{
+	"name": "Copy_Source_Raw_Curated",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Daily Files To Raw",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set File Full Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Trigger Type",
+						"value": "Tumble"
+					},
+					{
+						"name": "Source",
+						"value": "dailyfiles//@{concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')}"
+					},
+					{
+						"name": "Destination",
+						"value": "renewables/tarka/dailyfiles/@{concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')}"
+					},
+					{
+						"name": "fileCopied",
+						"value": "@concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 2
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ids_tarka_source_15",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_Name": {
+								"value": "@variables('file_Name_Full')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ids_tarka_destination_csv",
+						"type": "DatasetReference",
+						"parameters": {
+							"file_Name": {
+								"value": "@variables('file_Name_Full')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Set File Full Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set File Name Prefix",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_Name_Full",
+					"value": {
+						"value": "@concat(variables('file_Name_Prefix'),pipeline().parameters.file_Name_Suffix,'.csv')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set File Name Prefix",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "file_Name_Prefix",
+					"value": "ID118892_"
+				}
+			},
+			{
+				"name": "Set Error Message",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Copy Daily Files To Raw",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "Set Error Code",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "errorMessage",
+					"value": {
+						"value": "@activity('Copy Daily Files To Raw').Error?.message",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Error Code",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Copy Daily Files To Raw",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "errorCode",
+					"value": {
+						"value": "@activity('Copy Daily Files To Raw').Error?.errorCode",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Send Email",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Set Error Message",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"url": "https://prod-19.westeurope.logic.azure.com:443/workflows/b0d3719c697347c5b41d9ab602f66483/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=_VgqSee9m9jr4NaVdzuyJE9S9-lacTCcsckIj4-kypw",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"body": {
+						"value": "{\n        \"SynapseWorkspaceName\" : \"@{pipeline().DataFactory}\",\n        \"PipelineName\" : \"@{pipeline().Pipeline}\",\n        \"PipelineRunID\" : \"@{pipeline().RunId}\",\n        \"ErrorCode\" : \"@{variables('errorCode')}\",\n        \"ErrorMessage\" : \"@{variables('errorMessage')}\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Check Row Count",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Copy Daily Files To Raw",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Copy Daily Files To Raw').output.rowsCopied, 144)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Execute Pipeline - Send Email",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Send Email",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"messageBody": {
+										"value": "{\n        \"SynapseWorkspaceName\" : \"00000000000\",\n        \"PipelineName\" : \"Copy Source Raw Curated\",\n        \"PipelineRunID\" : \"111111111\",\n        \"ErrorCode\" : \"@{activity('Copy Daily Files To Raw').output.rowsCopied}\",\n        \"ErrorMessage\" : \"aaaaaa\"\n}",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Execute Pipeline - Copy Raw to Curated",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Copy Raw To Curated_chained",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"file_Name_Source": {
+										"value": "@variables('file_Name_Full')",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"file_Name_Suffix": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"file_Name_Prefix": {
+				"type": "String",
+				"defaultValue": "ID118892_"
+			},
+			"file_Name_Full": {
+				"type": "String"
+			},
+			"errorCode": {
+				"type": "String"
+			},
+			"errorMessage": {
+				"type": "String"
+			},
+			"emailAlert": {
+				"type": "String",
+				"defaultValue": "pramod_km@hotmail.com"
+			}
+		},
+		"folder": {
+			"name": "Production"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-03-04T10:32:33Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,29 @@
+{
+	"name": "relationship-aoqelxbnju",
+	"properties": {
+		"Name": "relationship-aoqelxbnju",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Customer",
+		"ToTableName": "Warehouse",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CustomerId",
+				"ToColumnName": "CustomerId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Customer.cdm.json/Customer\",\"toEntity\":\"Warehouse.cdm.json/Warehouse\",\"joinPairs\":[{\"fromAttribute\":\"CustomerId\",\"toAttribute\":\"CustomerId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "f2bc0928-b0c6-4a88-be1d-d255f264ad63"
+	},
+	"type": "RELATIONSHIP"
+}

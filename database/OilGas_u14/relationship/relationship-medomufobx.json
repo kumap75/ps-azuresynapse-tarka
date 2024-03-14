@@ -1,0 +1,29 @@
+{
+	"name": "relationship-medomufobx",
+	"properties": {
+		"Name": "relationship-medomufobx",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "OilAndGasProduct",
+		"ToTableName": "Item",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ProductId",
+				"ToColumnName": "ProductId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OilAndGasProduct.cdm.json/OilAndGasProduct\",\"toEntity\":\"Item.cdm.json/Item\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "6cfb1b78-6f4f-4085-8647-8d6afdc4c4b2"
+	},
+	"type": "RELATIONSHIP"
+}

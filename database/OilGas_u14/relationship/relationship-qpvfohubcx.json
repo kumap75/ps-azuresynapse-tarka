@@ -1,0 +1,29 @@
+{
+	"name": "relationship-qpvfohubcx",
+	"properties": {
+		"Name": "relationship-qpvfohubcx",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Customer",
+		"ToTableName": "Order",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CustomerId",
+				"ToColumnName": "CustomerId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Customer.cdm.json/Customer\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"CustomerId\",\"toAttribute\":\"CustomerId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "f7e19c5d-de74-4cdc-bb22-bb818722dde2"
+	},
+	"type": "RELATIONSHIP"
+}

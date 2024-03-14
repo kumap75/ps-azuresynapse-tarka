@@ -1,0 +1,29 @@
+{
+	"name": "relationship-vkdcreinos",
+	"properties": {
+		"Name": "relationship-vkdcreinos",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Vendor",
+		"ToTableName": "Order",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "VendorId",
+				"ToColumnName": "VendorId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Vendor.cdm.json/Vendor\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"VendorId\",\"toAttribute\":\"VendorId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "ed784352-f23e-4ff3-9f73-0f28534fa4c7"
+	},
+	"type": "RELATIONSHIP"
+}

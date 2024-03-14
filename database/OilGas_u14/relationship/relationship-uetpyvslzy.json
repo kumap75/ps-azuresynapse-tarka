@@ -1,0 +1,29 @@
+{
+	"name": "relationship-uetpyvslzy",
+	"properties": {
+		"Name": "relationship-uetpyvslzy",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Channel",
+		"ToTableName": "Order",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ChannelId",
+				"ToColumnName": "DistributionChannelId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Channel.cdm.json/Channel\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"ChannelId\",\"toAttribute\":\"DistributionChannelId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "030b568d-f37c-409c-8a53-24dc76b70ca2"
+	},
+	"type": "RELATIONSHIP"
+}

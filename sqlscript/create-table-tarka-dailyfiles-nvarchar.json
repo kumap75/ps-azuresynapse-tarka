@@ -1,0 +1,17 @@
+{
+	"name": "create-table-tarka-dailyfiles-nvarchar",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'renewables_psdlake1_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [renewables_psdlake1_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://renewables@psdlake1.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE tarka.dailyfiles (\n\t[DateTime] nvarchar(4000),\n\t[Battery] nvarchar(4000),\n\t[A1] nvarchar(4000),\n\t[A1-STDev] nvarchar(4000),\n\t[A1-Min] nvarchar(4000),\n\t[A1-Max] nvarchar(4000),\n\t[A1-TI30] nvarchar(4000),\n\t[A2] nvarchar(4000),\n\t[A2-STDev] nvarchar(4000),\n\t[A2-Min] nvarchar(4000),\n\t[A2-Max] nvarchar(4000),\n\t[A2-TI30] nvarchar(4000),\n\t[A3] nvarchar(4000),\n\t[A3-STDev] nvarchar(4000),\n\t[A3-Min] nvarchar(4000),\n\t[A3-Max] nvarchar(4000),\n\t[A4] nvarchar(4000),\n\t[A4-STDev] nvarchar(4000),\n\t[A4-Min] nvarchar(4000),\n\t[A4-Max] nvarchar(4000),\n\t[A5] nvarchar(4000),\n\t[A5-STDev] nvarchar(4000),\n\t[A5-Min] nvarchar(4000),\n\t[A5-Max] nvarchar(4000),\n\t[A6] nvarchar(4000),\n\t[A6-STDev] nvarchar(4000),\n\t[A6-Min] nvarchar(4000),\n\t[A6-Max] nvarchar(4000),\n\t[P1] nvarchar(4000),\n\t[P1-STDev] nvarchar(4000),\n\t[P1-Min] nvarchar(4000),\n\t[P1-Max] nvarchar(4000),\n\t[P2] nvarchar(4000),\n\t[P2-STDev] nvarchar(4000),\n\t[P2-Min] nvarchar(4000),\n\t[P2-Max] nvarchar(4000),\n\t[D1] nvarchar(4000),\n\t[D1-STDev] nvarchar(4000),\n\t[D1-Min] nvarchar(4000),\n\t[D1-Max] nvarchar(4000),\n\t[D2] nvarchar(4000),\n\t[D2-STDev] nvarchar(4000),\n\t[D2-Min] nvarchar(4000),\n\t[D2-Max] nvarchar(4000),\n\t[D3] nvarchar(4000),\n\t[D3-STDev] nvarchar(4000),\n\t[D3-Min] nvarchar(4000),\n\t[D3-Max] nvarchar(4000),\n\t[T1] nvarchar(4000),\n\t[T1-STDev] nvarchar(4000),\n\t[T1-Min] nvarchar(4000),\n\t[T1-Max] nvarchar(4000),\n\t[RH1] nvarchar(4000),\n\t[RH1-STDev] nvarchar(4000),\n\t[RH1-Min] nvarchar(4000),\n\t[RH1-Max] nvarchar(4000),\n\t[T2] nvarchar(4000),\n\t[T2-STDev] nvarchar(4000),\n\t[T2-Min] nvarchar(4000),\n\t[T2-Max] nvarchar(4000),\n\t[RH2] nvarchar(4000),\n\t[RH2-STDev] nvarchar(4000),\n\t[RH2-Min] nvarchar(4000),\n\t[RH2-Max] nvarchar(4000)\n\t)\n\tWITH (\n\tLOCATION = 'tarka/dailyfiles_parquet/ID118892_*.parquet',\n\tDATA_SOURCE = [renewables_psdlake1_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM tarka.dailyfiles\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sav_sqldb_curated",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

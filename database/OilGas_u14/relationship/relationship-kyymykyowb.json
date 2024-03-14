@@ -1,0 +1,29 @@
+{
+	"name": "relationship-kyymykyowb",
+	"properties": {
+		"Name": "relationship-kyymykyowb",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Employee",
+		"ToTableName": "Transaction",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmployeeId",
+				"ToColumnName": "ApprovedByEmployeeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Employee.cdm.json/Employee\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"EmployeeId\",\"toAttribute\":\"ApprovedByEmployeeId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "f690919a-99cb-4a35-aa37-61160e6fb71f"
+	},
+	"type": "RELATIONSHIP"
+}

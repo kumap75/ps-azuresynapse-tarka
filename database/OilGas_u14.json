@@ -1,0 +1,27 @@
+{
+	"name": "OilGas_u14",
+	"properties": {
+		"Name": "OilGas_u14",
+		"EntityType": "DATABASE",
+		"Description": "",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"OilGas\",\"Version\":\"1.3.0\"}}}",
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://renewables@psdlake1.dfs.core.windows.net/OilGas_u14",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "pssynapsews-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "417091d9-373f-42c0-a63d-af6990ea3091"
+	},
+	"type": "DATABASE"
+}

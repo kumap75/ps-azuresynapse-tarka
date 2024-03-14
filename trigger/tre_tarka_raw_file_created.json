@@ -1,0 +1,27 @@
+{
+	"name": "tre_tarka_raw_file_created",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Copy file and call notebook",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"file_Name_Source": "@triggerBody().fileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/renewables/blobs/tarka/dailyfiles/ID118892_",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/72d25639-8d46-4ea4-87a0-831d03f0bfc6/resourceGroups/PSRG1/providers/Microsoft.Storage/storageAccounts/psdlake1",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

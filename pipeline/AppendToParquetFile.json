@@ -1,0 +1,842 @@
+{
+	"name": "AppendToParquetFile",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy CSVs to Parquet",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 2
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DateTime",
+									"type": "DateTime",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DateTime",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Battery",
+									"type": "Double",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Battery",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A1",
+									"type": "Double",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A1-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A1-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A1-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A1-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A1-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A1-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A1-TI30",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A1-TI30",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A2-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A2-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A2-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A2-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A2-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A2-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A2-TI30",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A2-TI30",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A3",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A3-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A3-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A3-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A3-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A3-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A3-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A4",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A4-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A4-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A4-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A4-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A4-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A4-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A5",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A5",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A5-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A5-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A5-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A5-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A5-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A5-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A6",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A6",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A6-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A6-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A6-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A6-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "A6-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "A6-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P1-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P1-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P1-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P1-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P1-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P1-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P2-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P2-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P2-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P2-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "P2-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "P2-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D1-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D1-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D1-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D1-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D1-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D1-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D2-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D2-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D2-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D2-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D2-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D2-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D3",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D3-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D3-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D3-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D3-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D3-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "D3-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T1-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T1-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T1-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T1-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T1-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T1-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH1-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH1-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH1-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH1-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH1-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH1-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T2-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T2-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T2-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T2-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "T2-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "T2-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH2-STDev",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH2-STDev",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH2-Min",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH2-Min",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RH2-Max",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RH2-Max",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_tarka_monthly_files",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ids_renewables_tarka_parquet",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Development"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-02-15T17:53:44Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

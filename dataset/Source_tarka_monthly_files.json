@@ -1,0 +1,28 @@
+{
+	"name": "Source_tarka_monthly_files",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_tarka_source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "tarka-monthly-files"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Kintech Engineering Atlas Output Data File#2.0.2.112#UTC+01:00:00#TARKA1#118892#1830514206#",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

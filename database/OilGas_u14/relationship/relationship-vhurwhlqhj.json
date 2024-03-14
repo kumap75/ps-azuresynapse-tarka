@@ -1,0 +1,29 @@
+{
+	"name": "relationship-vhurwhlqhj",
+	"properties": {
+		"Name": "relationship-vhurwhlqhj",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "OilGas_u14"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Channel",
+		"ToTableName": "Transaction",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ChannelId",
+				"ToColumnName": "SalesChannelId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Channel.cdm.json/Channel\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"ChannelId\",\"toAttribute\":\"SalesChannelId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "41da8ae5-f52d-4f99-8831-c12c1b894e60"
+	},
+	"type": "RELATIONSHIP"
+}

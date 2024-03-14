@@ -1,0 +1,48 @@
+{
+	"name": "Send Email",
+	"properties": {
+		"description": "{\n        \"SynapseWorkspaceName\" : \"@{pipeline().DataFactory}\",\n        \"PipelineName\" : \"@{pipeline().Pipeline}\",\n        \"PipelineRunID\" : \"@{pipeline().RunId}\",\n        \"ErrorCode\" : \"@{variables('errorCode')}\",\n        \"ErrorMessage\" : \"@{variables('errorMessage')}\"\n}",
+		"activities": [
+			{
+				"name": "Send Email",
+				"description": "{\n        \"SynapseWorkspaceName\" : \"test\",\n        \"PipelineName\" : \"test\",\n        \"PipelineRunID\" : \"test\",\n        \"ErrorCode\" : \"test\",\n        \"ErrorMessage\" : \"test\"\n}",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"url": "https://prod-19.westeurope.logic.azure.com:443/workflows/b0d3719c697347c5b41d9ab602f66483/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=_VgqSee9m9jr4NaVdzuyJE9S9-lacTCcsckIj4-kypw",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"body": {
+						"value": "@pipeline().parameters.messageBody",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"messageBody": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Production"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-02-16T16:20:23Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
